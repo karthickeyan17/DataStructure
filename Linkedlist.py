@@ -53,7 +53,7 @@ class LinkedList:
             t = t.next
         print(f"Element-{key} not present in List!!!!\n")
 
-    def sort(self):
+    def sort(self,reverse=False):
         def divide(root):
             if not root or not root.next :
                 return root
@@ -74,7 +74,7 @@ class LinkedList:
         def merge(f,s):
             dummy = t = Node(0)
             while f and s:
-                if f.val < s.val :
+                if (f.val > s.val) if reverse else (f.val < s.val):
                     t.next=f
                     f=f.next
                 else:
@@ -85,31 +85,60 @@ class LinkedList:
             t.next = s if s else f
             return dummy.next
 
-
-
         self.head=divide(self.head)
 
+    def deleteAtEnd(self,n=1):
+        t = self.head
+        if not t:
+            raise("List Is Empty!!!")
 
+        cnt = 1
+        while t.next:
+            t = t.next
+            cnt+=1
 
+        n=cnt-n
+
+        dummy = t = Node(0,self.head)
+        while n>0 and t.next:
+            t = t.next
+            n-=1
+        t.next = None
+        self.head=dummy.next
+
+    def deleteAtBegining(self,n=1):
+        if not self.head :
+            raise("List Is Empty!!!")
+        while n!=0 and self.head:
+            self.head = self.head.next
+            n-=1
+
+    def deleteAt(self,pos):
+        if self.head and pos==1:
+            self.head=self.head.next
+            return 
+        t = self.head
+        cnt = 2
+        while t.next:
+            if cnt==pos:
+                t.next=t.next.next
+                return
+            cnt+=1
+            t = t.next
+        raise("Invalid Position For Delete")
 
 
 l = LinkedList()
+
 l.insert(10,6)
+l.display()
+l.deleteAtEnd()
+l.display()
 l.insert(1,1)
 l.insert(11,2)
 l.insert(9,1)
 l.insertAtEnd(10)
 l.insert(1,1)
-l.display()
-l.search(10)
-l.insertAtBegining(9)
-l.insert(11)
-l.insertAtEnd(11)
-l.display()
-l.search(100)
-l.sort()
-l.display()
-l.insert(1000,1)
 l.display()
 l.sort()
 l.display()
