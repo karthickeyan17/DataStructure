@@ -137,6 +137,26 @@ class LinkedList:
         self.head = tem
         tem.next = pre
 
+    def bulkInsertAtStart(self,ar):
+        dummy = t = Node(0)
+        for ele in ar:
+            t.next = Node(ele)
+            t = t.next
+        t.next = self.head
+        self.head = dummy.next
+    def bulkInsertAtEnd(self,ar):
+        dummy = t = Node(0)
+        for ele in ar:
+            t.next = Node(ele)
+            t = t.next
+        t = self.head
+        if self.head :
+            while t.next:
+                t = t.next
+            t.next = dummy.next
+        else:
+            self.head = dummy.next
+
     def length(self,s=True):
         t = self.head
         cnt = 0
@@ -154,12 +174,13 @@ class CLI_Linked_List :
         self.list = LinkedList()
     def menu(self):
         print("\n\t|----- Linked List CLI-Application -----|\n")
-        print("1. InsertAtBegining\t\t7. Sort")
-        print("2. InsertAtEnd\t\t\t8. Reverse")
-        print("3. InsertAtPosition\t\t9. Search")
-        print("4. DeleteAtBegining\t\t10. Reset")
-        print("5. DeleteAtEnd\t\t\t11. Length")
-        print("6. DeleteAtposition\t\t12. Exit")
+        print("1. InsertAtBegining\t\t8.  DeleteAtBegining")
+        print("2. InsertAtEnd\t\t\t9.  DeleteAtEnd")
+        print("3. InsertAtPosition\t\t10. DeleteAtPosition")
+        print("4. BulkInsertAtStart\t\t11. Sort")
+        print("5. BulkInsertAtEnd\t\t12. Search")
+        print("6. Reverse\t\t\t13. Lenght")
+        print("7. Reset\t\t\t14. Exit")
         self.list.display()
     def run(self):
         while True:
@@ -177,29 +198,35 @@ class CLI_Linked_List :
                     pos = int(input("Enter position to insert : "))
                     self.list.insert(ele,pos)
                 elif opt==4:
-                    n = int(input("Enter number of elements to be deleted at begining : "))
-                    self.list.deleteAtBegining(n)
+                    ar = list(map(int,input("Enter values separated by space : ").split()))
+                    self.list.bulkInsertAtStart(ar)
                 elif opt==5:
-                    n = int(input("Enter number of elements to be deleted at end : "))
-                    self.list.deleteAtEnd(n)
+                    ar = list(map(int,input("Enter values separated by space : ").split()))
+                    self.list.bulkInsertAtEnd(ar)
                 elif opt==6:
-                    n = int(input("Enter position to delete element :"))
-                    self.list.deleteAt(n)
-                elif opt==7:
-                    ch = input("Sort in descending order (y/n) : ").strip().lower()=="y"
-                    self.list.sort(reverse = ch)
-                elif opt==8:
                     self.list.reverse()
-                elif opt==9:
-                    ele = int(input("Enter value to Search : "))
-                    self.list.search(ele)
-                elif opt==10:
+                elif opt==7:
                     w = input("Are you sure to RESET (y/n):").strip().lower()=="y"
                     if w:
                         self.list.reset()
+                elif opt==8:
+                    n = int(input("Enter number of elements to be deleted at begining : "))
+                    self.list.deleteAtBegining(n)
+                elif opt==9:
+                    n = int(input("Enter number of elements to be deleted at end : "))
+                    self.list.deleteAtEnd(n)
+                elif opt==10:
+                    n = int(input("Enter position to delete element :"))
+                    self.list.deleteAt(n)                    
                 elif opt==11:
-                    self.list.length()
+                    ch = input("Sort in descending order (y/n) : ").strip().lower()=="y"
+                    self.list.sort(reverse = ch)
                 elif opt==12:
+                    ele = int(input("Enter value to Search : "))
+                    self.list.search(ele)                    
+                elif opt==13:
+                    self.list.length()
+                elif opt==14:
                     print("\tBye Bye!!!!!!!!!!!!!!!")
                     print("\t\tYou Are Exiting CLI_APPLICATION--------->>>>>>")
                     break
