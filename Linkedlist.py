@@ -2,10 +2,11 @@ class Node:
     def __init__(self,val=0,next=None):
         self.val = val
         self.next = next
+
 class LinkedList:
-    head = None
     def __init__(self,val=0):
         self.head = None
+
     def insertAtEnd(self,val):
         if self.head :
             t = self.head
@@ -14,9 +15,11 @@ class LinkedList:
             t.next = Node(val)
         else:
             self.head=Node(val)
+
     def insertAtBegining(self,val):
         t = Node(val,self.head)
         self.head = t
+
     def insert(self,val,pos=1):
         if pos<=0:
             raise("Not a valid postion!!!")
@@ -41,6 +44,7 @@ class LinkedList:
         else :
             print("None!!!!!")
         print()
+
     def search(self,key=None):
         if not key:raise("No Search key has passed")
         t = self.head
@@ -142,9 +146,6 @@ class LinkedList:
         if s :print(f"The length of the list --> {cnt}")
         return cnt
 
-
-
-
 l = LinkedList()
 
 l.insert(10,6)
@@ -157,7 +158,7 @@ l.insert(9,1)
 l.insertAtEnd(10)
 l.insert(1,1)
 l.display()
-l.deleteAtEnd(5)
+l.deleteAtEnd(2)
 l.display()
 l.length()
 
