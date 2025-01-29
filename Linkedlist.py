@@ -88,17 +88,10 @@ class LinkedList:
         self.head=divide(self.head)
 
     def deleteAtEnd(self,n=1):
-        t = self.head
-        if not t:
+        cnt = self.length(False)
+        if cnt==0:
             raise("List Is Empty!!!")
-
-        cnt = 1
-        while t.next:
-            t = t.next
-            cnt+=1
-
         n=cnt-n
-
         dummy = t = Node(0,self.head)
         while n>0 and t.next:
             t = t.next
@@ -127,6 +120,30 @@ class LinkedList:
             t = t.next
         raise("Invalid Position For Delete")
 
+    def reverse(self):
+        if not self.head or not self.head : return 
+
+        tem = self.head
+        pre = None
+        while tem.next:
+            nxt = tem.next
+            tem.next = pre
+            pre = tem
+            tem = nxt
+        self.head = tem
+        tem.next = pre
+
+    def length(self,s=True):
+        t = self.head
+        cnt = 0
+        while t:
+            cnt+=1
+            t = t.next
+        if s :print(f"The length of the list --> {cnt}")
+        return cnt
+
+
+
 
 l = LinkedList()
 
@@ -140,7 +157,8 @@ l.insert(9,1)
 l.insertAtEnd(10)
 l.insert(1,1)
 l.display()
-l.sort()
+l.deleteAtEnd(5)
 l.display()
+l.length()
 
 
