@@ -34,7 +34,7 @@ class LinkedList:
             t.next = Node(val,t.next)
 
     def display(self):
-        print("\t|-----The Linked List -----|")
+        print("\t[___The Linked List___]")
         if self.head:
             t = self.head
             while t.next:
@@ -145,21 +145,77 @@ class LinkedList:
             t = t.next
         if s :print(f"The length of the list --> {cnt}")
         return cnt
+    def reset(self):
+        self.head=None
 
-l = LinkedList()
 
-l.insert(10,6)
-l.display()
-l.deleteAtEnd()
-l.display()
-l.insert(1,1)
-l.insert(11,2)
-l.insert(9,1)
-l.insertAtEnd(10)
-l.insert(1,1)
-l.display()
-l.deleteAtEnd(2)
-l.display()
-l.length()
+class CLI_Linked_List :
+    def __init__(self):
+        self.list = LinkedList()
+    def menu(self):
+        print("\n\t|----- Linked List CLI-Application -----|\n")
+        print("1. InsertAtBegining\t\t7. Sort")
+        print("2. InsertAtEnd\t\t\t8. Reverse")
+        print("3. InsertAtPosition\t\t9. Search")
+        print("4. DeleteAtBegining\t\t10. Reset")
+        print("5. DeleteAtEnd\t\t\t11. Length")
+        print("6. DeleteAtposition\t\t12. Exit")
+        self.list.display()
+    def run(self):
+        while True:
+            self.menu()
+            try:
+                opt = int(input("Enter Your Choice: "))
+                if opt==1:
+                    ele = int(input("Enter value to insert at begining : "))
+                    self.list.insertAtBegining(ele)
+                elif opt==2:
+                    ele = int(input("Enter value to insert at end : "))
+                    self.list.insertAtEnd(ele)
+                elif opt==3:
+                    ele = int(input("Enter value to insert : "))
+                    pos = int(input("Enter position to insert : "))
+                    self.list.insert(ele,pos)
+                elif opt==4:
+                    n = int(input("Enter number of elements to be deleted at begining : "))
+                    self.list.deleteAtBegining(n)
+                elif opt==5:
+                    n = int(input("Enter number of elements to be deleted at end : "))
+                    self.list.deleteAtEnd(n)
+                elif opt==6:
+                    n = int(input("Enter position to delete element :"))
+                    self.list.deleteAt(n)
+                elif opt==7:
+                    ch = input("Sort in descending order (y/n) : ").strip().lower()=="y"
+                    self.list.sort(reverse = ch)
+                elif opt==8:
+                    self.list.reverse()
+                elif opt==9:
+                    ele = int(input("Enter value to Search : "))
+                    self.list.search(ele)
+                elif opt==10:
+                    w = input("Are you sure to RESET (y/n):").strip().lower()=="y"
+                    if w:
+                        self.list.reset()
+                elif opt==11:
+                    self.list.length()
+                elif opt==12:
+                    print("\tBye Bye!!!!!!!!!!!!!!!")
+                    print("\t\tYou Are Exiting CLI_APPLICATION--------->>>>>>")
+                    break
+                else:
+                    print("--------->>Invalid Option !!!!\nTry Again")
+
+            except Exception as e:
+                print(f"ERROR : {e}")
+
+
+
+
+if __name__ == "__main__":
+    app = CLI_Linked_List()
+    app.run()
+
+
 
 
