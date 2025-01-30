@@ -144,6 +144,7 @@ class LinkedList:
             t = t.next
         t.next = self.head
         self.head = dummy.next
+
     def bulkInsertAtEnd(self,ar):
         dummy = t = Node(0)
         for ele in ar:
@@ -165,6 +166,7 @@ class LinkedList:
             t = t.next
         if s :print(f"The length of the list --> {cnt}")
         return cnt
+
     def reset(self):
         self.head=None
 
@@ -179,7 +181,7 @@ class CLI_Linked_List :
         print("3. InsertAtPosition\t\t10. DeleteAtPosition")
         print("4. BulkInsertAtStart\t\t11. Sort")
         print("5. BulkInsertAtEnd\t\t12. Search")
-        print("6. Reverse\t\t\t13. Lenght")
+        print("6. Reverse\t\t\t13. Length")
         print("7. Reset\t\t\t14. Exit")
         self.list.display()
     def run(self):
@@ -227,8 +229,8 @@ class CLI_Linked_List :
                 elif opt==13:
                     self.list.length()
                 elif opt==14:
-                    print("\tBye Bye!!!!!!!!!!!!!!!")
-                    print("\t\tYou Are Exiting CLI_APPLICATION--------->>>>>>")
+                    print("\t\t!!!!!!!!!!!!!Bye Bye!!!!!!!!!!!!!!!")
+                    print("<<<<<<------------You Are Exiting CLI_APPLICATION----------->>>>>>")
                     break
                 else:
                     print("--------->>Invalid Option !!!!\nTry Again")
