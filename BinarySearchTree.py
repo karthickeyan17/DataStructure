@@ -43,7 +43,7 @@ class BST:
             postorder(root.right)
             res.append(root.val)
         def levelorder(root):
-            levels=[[root.val]]
+            res.append([root.val])
             q = [root]
             while q!=[]:
                 n = len(q)
@@ -60,26 +60,28 @@ class BST:
                         level.append(cur.right.val)
                     else:
                         level.append(None)
-                levels.append(list(level))
-            levels=levels[:-1]
-            if dis:
-                print("\t__Level Order Traversal__")
-                for i,level in enumerate(levels):
-                    print(f" Level-{i+1} --> {level}")
-                print()
-            else:
-                return levels                
+                res.append(list(level)) 
 
+        if not self.root:
+            print("(Tree Empty)!!!")
+            return []
         res = []
         if order=='in': inorder(self.root)
         elif order=='pre': preorder(self.root)
         elif order=="post": postorder(self.root)
         else:
-            return levelorder(self.root)            
-        if order!="level":
+            levelorder(self.root)            
+            res=res[:-1]
+
+        if order=="level" and dis:
+            print("\t__Level Order Traversal__")
+            for i,level in enumerate(res):
+                print(f" Level-{i+1} --> {level}")
+            print()
+        elif dis:
             print(f"\t__{order.capitalize()}order traversal__\n  {res}\n")
-
-
+        else:
+            return res
 
     def treeHeight(self,disp=True):
         def h(root):
@@ -94,12 +96,12 @@ class BST:
             if not node:
                 return
             if node.right:
-                p(node.right, prefix + ("│   " if is_left else "    "), False)
+                p(node.right, prefix + ("│    " if is_left else "     "), False)
 
-            print(prefix + ("└── " if is_left else "┌── ") + str(node.val))
+            print(prefix + ("└── " if is_left else "┌── ") +"["+str(node.val)+"]")
         
             if node.left:
-                p(node.left, prefix + ("    " if is_left else "│   "), True)
+                p(node.left, prefix + ("     " if is_left else "│    "), True)
 
         if not self.root:
             print("(empty tree)\n")
@@ -129,7 +131,7 @@ class CLI_BST:
         print("\n\t|----- BST CLI-Application -----|\n")
         print("1. Insert\t5. Height")
         print("2. BulkInsert\t6. Search")
-        print("3. Traverse\t7. ")
+        print("3. Traverse\t7. Find Min&Max values")
         print("4. Reset\t8. Exit\n")
         self.tree.display()
     def run(self):
@@ -160,7 +162,9 @@ class CLI_BST:
                     ele = int(input("Enter value to Search : "))
                     self.tree.search(ele)
                 elif opt==7:
-                    pass    
+                    inor = self.tree.traverse(dis=False)
+                    if inor :
+                        print(f"MIN = {inor[0]} & MAX = {inor[-1]}")
                 elif opt==8:
                     print("\tBye Bye!!!!!!!!!!!!!!!")
                     print("\t\tYou Are Exiting CLI_APPLICATION--------->>>>>>")
